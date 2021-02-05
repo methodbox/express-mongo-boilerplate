@@ -1,0 +1,13 @@
+node_modules
+.vscode
+.DS_Store
+._.DS_Store
+**/*.DS_Store*
+/src/public/*.js
+/src/public/*.html
+/src/public/*.png
+# The .env is intentionally committed 
+# to this repo for dev purposes only.
+# Uncomment the next 2 lines to avoid a committing .env.
+#/.env
+#./.env
