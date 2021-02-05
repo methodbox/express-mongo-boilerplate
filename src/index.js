@@ -14,7 +14,8 @@ import bodyParser from "body-parser";
 import "dotenv/config";
 //  API docs
 import swaggerUi from "swagger-ui-express";
-const swaggerCfg = require("./src/swagger.cfg.js");
+const swaggerCfg = require("./swagger.cfg.js");
+
 /** mongo & mongoose - uncomment if using Mongo
  * import models, { connectDb } from "./models";
  */
@@ -23,7 +24,10 @@ const swaggerCfg = require("./src/swagger.cfg.js");
  * Express config
  */
 const app = express();
+/** serve swagger */
 
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerCfg.options));
+//  end Express config
 //  Set Express render engine config
 app.set("view engine", "ejs");
 app.set("json spaces", 0);
@@ -31,7 +35,7 @@ app.set("json spaces", 0);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //  serve static content (React app) from ./public
-app.use("/", express.static(path.join(__dirname + "/public")));
+app.use("/", express.static(path.join(__dirname + "/static")));
 //  header config
 /**
  * TO ENABLE CORS:
@@ -51,15 +55,12 @@ app.use("/", express.static(path.join(__dirname + "/public")));
  */
 app.use((req, res, next) => {
   //  comment out next line when disabling CORS
-  res.header("Access-Control-Allow-Origin", "*");
+  //  res.header("Access-Control-Allow-Origin", "*");
   res.set("Content-Type", "application/json");
   res.append("Access-Control-Allow-Headers", "Content-Type");
 
   next();
 });
-/** serve swagger */
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerCfg.options));
-//  end Express config
 
 /** Mongoose methods for Mongo CRUD */
 
@@ -109,7 +110,7 @@ async function exampleMongooseDBMethod(param1, param2) {
  * Home route
  */
 app.get("/", (req, res) => {
-  res.sendFile(path.join(`${__dirname}/public/index.html`));
+  res.sendFile(path.join(`${__dirname}/static/index.html`));
 });
 
 /**** API methods */

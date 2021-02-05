@@ -1,10 +1,10 @@
 {
   "name": "express-mongo-boilerplate",
   "version": "1.0.0",
-  "description": "Express and MongoDB boilerplate configuration for basic API endpoints use Mongoose.",
+  "description": "Express and MongoDB boilerplate configuration for basic API endpoints use Mongo",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node index.js",
+    "start": "nodemon --exec babel-node src/index.js",
     "start-internal": "nodemon --exec babel-node src/internal.js"
   },
   "author": "Chris A. Shaffer",
